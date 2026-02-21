@@ -18,7 +18,7 @@ func New(input string) *Lexer {
 func (l *Lexer) NextToken() token.Token {
 	var tok token.Token
 
-	l.skipWhitespace()
+	l.readWhile(isWhitespace)
 
 	switch l.ch {
 	case '=':
@@ -67,10 +67,8 @@ func (l *Lexer) readWhile(predicte func(byte) bool) string {
 	return l.input[pos:l.position]
 }
 
-func (l *Lexer) skipWhitespace() {
-	for l.ch == ' ' || l.ch == '\t' || l.ch == '\n' || l.ch == '\r' {
-		l.readChar()
-	}
+func isWhitespace(ch byte) bool {
+	return ch == ' ' || ch == '\t' || ch == '\n' || ch == '\r'
 }
 
 func isLetter(ch byte) bool {
