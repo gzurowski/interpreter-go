@@ -31,3 +31,7 @@ type Token struct {
 	Type    Type
 	Literal string
 }
+
+func New(tokenType Type, literal string) Token {
+	return Token{Type: tokenType, Literal: literal}
+}
